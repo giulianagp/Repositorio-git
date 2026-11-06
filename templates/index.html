@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Tienda - SQLite</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center text-primary fw-bold">Gestión de Productos (SQLite)</h2>
+
+        <!-- Formulario -->
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">Agregar Producto</div>
+            <div class="card-body">
+                <form action="/guardar" method="POST" class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Código</label>
+                        <input type="text" name="codigo" class="form-control" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Precio</label>
+                        <input type="number" step="0.01" name="precio" class="form-control" required>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Cantidad</label>
+                        <input type="number" name="cantidad" class="form-control" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-success w-100">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="card shadow">
+            <div class="card-header bg-dark text-white">Lista de Productos</div>
+            <div class="card-body">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Código</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.codigo }}</td>
+                            <td>{{ p.nombre }}</td>
+                            <td>$ {{ "%.2f"|format(p.precio) }}</td>
+                            <td>{{ p.cantidad }}</td>
+                            <td>
+                                <a href="/editar/{{ p.id }}" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="/eliminar/{{ p.id }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que deseas eliminar?');">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
