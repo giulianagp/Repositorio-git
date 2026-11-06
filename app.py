@@ -3,7 +3,6 @@ from models.producto_CRUD import ProductoCRUD
 
 app = Flask(__name__)
 
-# Inicializar la base de datos al arrancar la app
 with app.app_context():
     ProductoCRUD.inicializar_bd()
 

@@ -12,7 +12,7 @@ class ProductoCRUD:
 
     @staticmethod
     def inicializar_bd():
-        # Crea la tabla y los registros iniciales si no existen
+      
         conexion = Conexion.get_instancia()
         cursor = conexion.cursor()
         cursor.execute("""
@@ -25,7 +25,6 @@ class ProductoCRUD:
             )
         """)
         
-        # Verificar si ya tiene datos, si está vacía insertamos los registros del tienda.sql
         cursor.execute("SELECT COUNT(*) FROM producto")
         if cursor.fetchone()[0] == 0:
             registros_iniciales = [
